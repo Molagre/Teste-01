@@ -1,0 +1,82 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Poke API</title>
+        <link rel="stylesheet" href="main.css">
+    </head>
+
+    <body>
+
+        <div class="imgtitle">
+            <img src="pokeapi.png" alt="">
+        </div>
+        
+        <div class="instructions">
+            Digite um número para selecionar um pokemon e veja suas especificações!</h1>
+        </div>
+            
+        <div class="input">
+            <input type="number" placeholder="Digite uma Id" id="cxtexto" style="width:200;height:50">
+            <button onclick="BuscarId()" class="MenuInput" >Buscar Id</button>
+
+            <div class="inputlateral">
+                <button onclick="AnteriorId()" style="width:120;height:50" class="MenuInput" >Anterior</button>
+                
+                <button onclick="ProximoId()" style="width:120;height:50" class="MenuInput" >Próximo</button>
+           </div>
+            
+        </div>
+
+
+        <script>
+
+        let NumeroProximoId = document.getElementById('cxtexto').value
+                         
+        // Função principal
+        function BuscarId() {
+            
+            var IdPokemon = document.getElementById('cxtexto').value
+            
+            if(IdPokemon>899) {
+                alert('Ops! Digite um número até 899')
+            } else {
+                
+                fetch('https://pokeapi.co/api/v2/pokemon/'+IdPokemon)
+                    .then(function(response){
+                        return response.json()
+                    })
+                    
+                    .then(function(data){
+                        
+                        document.getElementById('NomePokemon').innerHTML = data.name;
+                        
+                        var img = data.sprites.front_default;
+                        document.getElementById('pic').setAttribute('src', img);
+
+                    });    
+                
+            }
+        }
+
+        // Função Proximo
+        function AnteriorId() {
+
+            console.log("este botão não está funcionando")
+        }
+
+        // Função Proximo
+        function ProximoId() {
+
+        console.log("este botão não está funcionando")
+        }   
+
+        </script>
+
+        <div class="namepokemon" Id = 'NomePokemon'> </div>
+        
+        <div class="imgpokemon">
+            <img id = 'pic' height=25%>
+        </div>
+
+    </body>
+</html>
